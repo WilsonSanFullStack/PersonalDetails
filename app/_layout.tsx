@@ -6,6 +6,7 @@ import "../global.css";
 import ThemeSafeAreaView from "@/components/ui/ThemeSafeAreaView";
 import ThemeText from "@/components/ui/ThemeText";
 
+
 export default function RootLayout() {
   return (
     <ThemeSafeAreaView >

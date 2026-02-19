@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { Text, TextProps } from "react-native";
 
-type ThemeTextVariant = "title" | "paragraph" | "error" | "default";
+type ThemeTextVariant = "title" | "paragraph" | "error" | "default" | "pressable";
 
 interface IThemeText extends TextProps {
   children: ReactNode;
@@ -11,6 +11,7 @@ interface IThemeText extends TextProps {
 
 const variantClasses: Record<ThemeTextVariant, string> = {
   title: "text-2xl font-bold text-accent mb-2",
+  pressable: "text-xl font-bold text-black mb-2 text-center",
   paragraph: "text-base text-textSecondary mb-1",
   error: "text-sm font-bold text-error mb-1",
   default: "text-base text-text",

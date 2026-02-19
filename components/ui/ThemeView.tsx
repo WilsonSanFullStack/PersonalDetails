@@ -10,9 +10,9 @@ interface IThemeView extends ViewProps {
 }
 
 const variantClasses: Record<ThemeViewVariant, string> = {
-  default: "bg-white p-4",
-  card: "bg-white p-6 rounded-lg shadow-md",
-  rounded: "bg-white p-4 rounded-full",
+  default: "bg-background p-4",
+  card: "bg-background p-6 rounded-lg shadow-md",
+  rounded: "bg-background p-4 rounded-full",
   error: "bg-error p-4 rounded-md",
 };
 

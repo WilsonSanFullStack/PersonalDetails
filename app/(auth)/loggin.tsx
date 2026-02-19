@@ -39,8 +39,8 @@ export default function loggin() {
 
   return (
     <ThemeView
-      variant="card"
-      className="flex justify-center bg-gray-800 p-4 m-2">
+      variant="default"
+      className="flex-1 justify-center bg-gray-800 p-4 m-2">
 
       {/* email */}
       <View className="p-2">

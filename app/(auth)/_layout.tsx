@@ -9,11 +9,11 @@ export default function _layout() {
   return (
     <ThemeSafeAreaView>
       
-      <Tabs>
+      {/* <Tabs>
         <Tabs.Screen name="(auth)/loggin.tsx" options={{ headerTitle: "Iniciar Sesión" }}  />
         <Tabs.Screen name="(auth)/register.tsx" options={{ headerTitle: "Registro" }} />
-      </Tabs>
-      {/* <Slot /> */}
+      </Tabs> */}
+      <Slot />
           </ThemeSafeAreaView>
   );
 }
