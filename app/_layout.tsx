@@ -1,24 +1,18 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { Stack } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import 'react-native-reanimated';
+import { Slot } from "expo-router";
+import React from "react";
+import "../global.css";
 
-import { useColorScheme } from '@/hooks/use-color-scheme';
-
-export const unstable_settings = {
-  anchor: '(tabs)',
-};
+//importacion de componentes de ui
+import ThemeSafeAreaView from "@/components/ui/ThemeSafeAreaView";
+import ThemeText from "@/components/ui/ThemeText";
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
-
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
+    <ThemeSafeAreaView >
+      <ThemeText variant="title" className="text-center">bienvenido a agenda</ThemeText>
+      <Slot />
+
+      {/* <StatusBar style="light" translucent  />   */}
+    </ThemeSafeAreaView>
   );
 }
