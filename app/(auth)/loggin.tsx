@@ -38,9 +38,10 @@ export default function loggin() {
   };
 
   return (
+    <View className="flex-1 justify-center">
     <ThemeView
-      variant="default"
-      className="flex-1 justify-center bg-gray-800 p-4 m-2">
+      variant="card"
+      className=" bg-gray-800 p-4 m-2">
 
       {/* email */}
       <View className="p-2">
@@ -104,5 +105,6 @@ export default function loggin() {
         </ThemePressable>
       </View>
     </ThemeView>
+    </View>
   );
 }

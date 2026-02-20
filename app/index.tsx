@@ -2,12 +2,14 @@ import ThemePressable from "@/components/ui/ThemePressable";
 import ThemeSafeAreaView from "@/components/ui/ThemeSafeAreaView";
 import ThemeText from "@/components/ui/ThemeText";
 import ThemeView from "@/components/ui/ThemeView";
+import { router } from "expo-router";
 
 import React from "react";
 
+
 const index = () => {
   return (
-    <ThemeSafeAreaView className="bg-background p-8">
+    <ThemeSafeAreaView className="bg-background">
       <ThemeText variant="paragraph" className="text-justify">
         Esta aplicacion esta en fase de desarrollo la aplicacion esta orientada
         a aquellas personas que trabajan como modelo webcam y desean tener sus
@@ -22,10 +24,14 @@ const index = () => {
         esta app y las de su estudio
       </ThemeText>
 
-      <ThemeView variant="default" className="bg-background justify-between items-center flex-row">
-        <ThemePressable variant="primary" className="m-2 w-48">
+      <ThemeView variant="default" className="bg-background justify-center items-center flex-row">
+        
+        
+        <ThemePressable variant="primary" className="m-2 w-48" onPress={()=>router.push('/loggin')}>
           <ThemeText variant="pressable">Iniciar Sesion</ThemeText>
         </ThemePressable>
+        
+
         <ThemePressable variant="primary" className="m-2 w-48">
           <ThemeText variant="pressable">Registrarse</ThemeText>
         </ThemePressable>
