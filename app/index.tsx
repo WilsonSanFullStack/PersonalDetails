@@ -6,7 +6,6 @@ import { router } from "expo-router";
 
 import React from "react";
 
-
 const index = () => {
   return (
     <ThemeSafeAreaView className="bg-background">
@@ -24,15 +23,20 @@ const index = () => {
         esta app y las de su estudio
       </ThemeText>
 
-      <ThemeView variant="default" className="bg-background justify-center items-center flex-row">
-        
-        
-        <ThemePressable variant="primary" className="m-2 w-48" onPress={()=>router.push('/loggin')}>
+      <ThemeView
+        variant="default"
+        className="bg-background justify-center items-center flex-row">
+        <ThemePressable
+          variant="primary"
+          className="m-2 w-48"
+          onPress={() => router.push("/(auth)/loggin")}>
           <ThemeText variant="pressable">Iniciar Sesion</ThemeText>
         </ThemePressable>
-        
 
-        <ThemePressable variant="primary" className="m-2 w-48">
+        <ThemePressable
+          variant="primary"
+          className="m-2 w-48"
+          onPress={() => router.push("/(auth)/register")}>
           <ThemeText variant="pressable">Registrarse</ThemeText>
         </ThemePressable>
       </ThemeView>

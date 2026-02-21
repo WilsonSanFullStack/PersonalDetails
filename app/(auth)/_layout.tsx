@@ -1,14 +1,21 @@
 import ThemeSafeAreaView from "@/components/ui/ThemeSafeAreaView";
-import ThemeText from "@/components/ui/ThemeText";
-import { Slot, Tabs } from "expo-router";
-import React from "react";
-import { Text } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { useAuth } from "@/context/AuthContext";
+import { Slot, useRouter } from "expo-router";
+import React, { useEffect } from "react";
 
-export default function _layout() {
+export default function AuthLayout() {
+  const { user } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (user) {
+      router.replace("/(app)/workspace/ws1");
+    }
+  }, [user]);
+
   return (
     <ThemeSafeAreaView>
       <Slot />
-          </ThemeSafeAreaView>
+    </ThemeSafeAreaView>
   );
 }
