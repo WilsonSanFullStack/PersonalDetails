@@ -3,31 +3,46 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 //pantallas
 import ScreenSession from "./screen/ScreenSession";
 import ScreenHome from "./screen/ScreenHome";
 
 const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
-function MyStack() {
+function MyTab() {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen
+    <Tab.Navigator screenOptions={{ headerShown: true }}>
+      <Tab.Screen
         name="Home"
         component={ScreenHome}
-        options={{ navigationBarHidden: false,  }}
+        
       />
-      <Stack.Screen name="session" component={ScreenSession} />
-    </Stack.Navigator>
+      <Tab.Screen name="session" component={ScreenSession} />
+    </Tab.Navigator>
   );
 }
+// function MyStack() {
+//   return (
+//     <Stack.Navigator screenOptions={{ headerShown: true }}>
+//       <Stack.Screen
+//         name="Home"
+//         component={ScreenHome}
+//         options={{ navigationBarHidden: false,  }}
+//       />
+//       <Stack.Screen name="session" component={ScreenSession} />
+//     </Stack.Navigator>
+//   );
+// }
 
 export default function App() {
   return (
     <NavigationContainer>
-      <MyStack />
-      <StatusBar style="auto" />
+      {/* <MyStack /> */}
+      <MyTab />
+      {/* <StatusBar style="auto" /> */}
     </NavigationContainer>
   );
 }
