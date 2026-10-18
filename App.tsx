@@ -1,6 +1,6 @@
 import * as React from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet } from "react-native";
+import { useAppTheme } from "./theme";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -13,14 +13,30 @@ const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 function MyTab() {
+  const { colors } = useAppTheme();
+
   return (
-    <Tab.Navigator screenOptions={{ headerShown: true }}>
+    <Tab.Navigator
+      screenOptions={{
+        headerShown: true,
+        headerStyle: { backgroundColor: colors.surface },
+        headerTintColor: colors.text,
+        headerTitleStyle: { color: colors.text },
+        tabBarStyle: {
+          backgroundColor: colors.surface,
+          borderTopColor: colors.border,
+        },
+        tabBarActiveTintColor: colors.accent,
+        tabBarInactiveTintColor: colors.textMuted,
+        sceneStyle: { backgroundColor: colors.background },
+      }}
+    >
+      <Tab.Screen name="session" component={ScreenSession} />
       <Tab.Screen
         name="Home"
         component={ScreenHome}
         
       />
-      <Tab.Screen name="session" component={ScreenSession} />
     </Tab.Navigator>
   );
 }
@@ -38,20 +54,13 @@ function MyTab() {
 // }
 
 export default function App() {
+  const { mode, navigationTheme } = useAppTheme();
+
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={navigationTheme}>
       {/* <MyStack /> */}
       <MyTab />
-      {/* <StatusBar style="auto" /> */}
+      <StatusBar style={mode === "dark" ? "light" : "dark"} />
     </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
