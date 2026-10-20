@@ -8,6 +8,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 //pantallas
 import ScreenSession from "./screen/ScreenSession";
 import ScreenHome from "./screen/ScreenHome";
+import ScreenRegister from './screen/ScreenRegister';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -32,6 +33,7 @@ function MyTab() {
       }}
     >
       <Tab.Screen name="session" component={ScreenSession} />
+      <Tab.Screen name="registro" component={ScreenRegister} options={{ headerShown: false }} />
       <Tab.Screen
         name="Home"
         component={ScreenHome}

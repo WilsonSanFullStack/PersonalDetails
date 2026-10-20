@@ -1,22 +1,55 @@
 import { StyleSheet } from "react-native";
-import { Text, View } from "../theme";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { StatusBar } from "expo-status-bar";
 
-export default function ScreenRegister() {
+import {
+  Text,
+  View,
+  Pressable,
+  useAppTheme,
+  getPressableTextColor,
+} from "../theme";
+//pantallas
+import RegistrarPagina from "./registro/RegistrarPagina";
+import RegistrarMoneda from "./registro/RegistrarMoneda";
+import ScreenRegisterMenu from "./registro/ScreenRegisterMenu";
+
+export type RegisterStackParamList = {
+  Menu: undefined;
+  Pagina: undefined;
+  Moneda: undefined;
+  // ... resto
+};
+
+const Stack = createNativeStackNavigator<RegisterStackParamList>();
+
+function MyStack() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Screen Register</Text>
-    </View>
+    <Stack.Navigator
+      initialRouteName="Menu"
+      screenOptions={{ headerShown: true }}
+    >
+      <Stack.Screen
+        name="Menu"
+        component={ScreenRegisterMenu}
+        options={{ title: "Registros", headerBackVisible: false }}
+      />
+      <Stack.Screen
+        name="Pagina"
+        component={RegistrarPagina}
+        options={{ title: "Registrar página" }}
+      />
+      <Stack.Screen
+        name="Moneda"
+        component={RegistrarMoneda}
+        options={{ title: "Registrar moneda" }}
+      />
+    
+    </Stack.Navigator>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    padding: 24,
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: "600",
-  },
-});
+export default function ScreenRegister() {
+  return <MyStack />;
+}
