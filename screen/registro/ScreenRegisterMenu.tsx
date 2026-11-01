@@ -15,6 +15,7 @@ type Props = NativeStackScreenProps<RegisterStackParamList, "Menu">;
 const ITEMS: { key: keyof RegisterStackParamList; label: string }[] = [
   { key: "Pagina", label: "Registrar página" },
   { key: "Moneda", label: "Registrar moneda" },
+  { key: "Constantes", label: "Registrar constantes" },
   // ... los 8
 ];
 

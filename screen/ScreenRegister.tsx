@@ -14,11 +14,13 @@ import {
 import RegistrarPagina from "./registro/RegistrarPagina";
 import RegistrarMoneda from "./registro/RegistrarMoneda";
 import ScreenRegisterMenu from "./registro/ScreenRegisterMenu";
+import RegisterConst from "./registro/RegisterConst";
 
 export type RegisterStackParamList = {
   Menu: undefined;
   Pagina: undefined;
   Moneda: undefined;
+  Constantes: undefined;
   // ... resto
 };
 
@@ -45,7 +47,12 @@ function MyStack() {
         component={RegistrarMoneda}
         options={{ title: "Registrar moneda" }}
       />
-    
+      <Stack.Screen
+        name="Constantes"
+        component={RegisterConst}
+        options={{ title: "Registrar constantes" }}
+      />
+      
     </Stack.Navigator>
   );
 }

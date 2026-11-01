@@ -66,9 +66,9 @@
 // });
 
 
-import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 
 import { View, Text, Pressable, useAppTheme, getPressableTextColor } from "../../theme";
+import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import type { RegisterStackParamList } from "../ScreenRegister";
 
 type Props = NativeStackScreenProps<RegisterStackParamList, "Pagina">;
