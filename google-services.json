@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "114439451656",
+    "project_id": "agendamovil-6f27e",
+    "storage_bucket": "agendamovil-6f27e.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:114439451656:android:36409af8fab4b9c885cdbd",
+        "android_client_info": {
+          "package_name": "com.wilsonsan.agendaAppMovil"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "114439451656-ap6u3b94dpiecgkq08jl9dn1sofid3ol.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVDhuZCiD3HVVd-JBpT-sK4kMSKlDmdN0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "114439451656-ap6u3b94dpiecgkq08jl9dn1sofid3ol.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
