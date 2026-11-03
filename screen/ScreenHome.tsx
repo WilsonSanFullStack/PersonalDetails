@@ -5,7 +5,7 @@ export default function ScreenHome() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>hi ScreenHome</Text>
-      <Text style={styles.container}>{process.env.EXPO_PUBLIC_API_messagingSenderId}</Text>
+      <Text style={styles.container}></Text>
     </View>
   );
 }

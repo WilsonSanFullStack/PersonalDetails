@@ -207,6 +207,18 @@ recalcula al consultar.
 * No se puede modificar QF, QAR, Resumen, revisiones, cierre ni historial
   directamente desde el cliente.
 
+### Bypass de autenticación en desarrollo
+
+En `.env`, establece `EXPO_PUBLIC_AUTH_BYPASS=true` para abrir directamente las
+pantallas principales durante el desarrollo. Firebase y Firestore se inicializan,
+pero no se crea ni se simula un usuario autenticado; las operaciones protegidas
+por Firestore Rules seguirán requiriendo autenticación.
+
+Al cambiar esta variable, reinicia Metro para que Expo cargue el nuevo valor. Con
+el bypass activo puedes probar cambios JavaScript sin reconstruir el cliente
+nativo. Para probar Google Sign-In, desactiva el bypass y usa un development
+build que incluya el módulo nativo de Google.
+
 ---
 
 # 👥 Multiusuario

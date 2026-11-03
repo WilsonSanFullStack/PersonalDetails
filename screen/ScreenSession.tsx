@@ -6,7 +6,6 @@ import {
   ScrollView,
   StyleSheet,
 } from "react-native";
-import { useNavigation, type NavigationProp } from "@react-navigation/native";
 import { signInWithGoogle } from "../firebase/firebase";
 import {
   Pressable,
@@ -15,10 +14,6 @@ import {
   getPressableTextColor,
   useAppTheme,
 } from "../theme";
-
-type AppTabParamList = {
-  Home: undefined;
-};
 
 function getSignInErrorMessage(error: unknown) {
   if (typeof error === "object" && error !== null && "code" in error) {
@@ -40,18 +35,15 @@ function getSignInErrorMessage(error: unknown) {
 }
 
 const ScreenSession = () => {
-  const navigation = useNavigation<NavigationProp<AppTabParamList>>();
   const { colors } = useAppTheme();
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
-  async function handleSignIn(signIn: () => Promise<unknown>) {
+  async function handleSignIn() {
     setErrorMessage("");
     setIsLoading(true);
-
     try {
-      await signIn();
-      navigation.navigate("Home");
+      await signInWithGoogle();
     } catch (error) {
       console.error("Error al iniciar sesión:", error);
       setErrorMessage(getSignInErrorMessage(error));
@@ -87,14 +79,18 @@ const ScreenSession = () => {
             <Pressable
               accessibilityRole="button"
               disabled={isLoading}
-              onPress={() => void handleSignIn(signInWithGoogle)}
+              onPress={() => void handleSignIn()}
               style={styles.button}
               variant="secondary"
             >
               {isLoading ? (
-                <ActivityIndicator color={getPressableTextColor("secondary", colors)} />
+                <ActivityIndicator
+                  color={getPressableTextColor("secondary", colors)}
+                />
               ) : (
-                <Text style={{ color: getPressableTextColor("secondary", colors) }}>
+                <Text
+                  style={{ color: getPressableTextColor("secondary", colors) }}
+                >
                   Continuar con Google
                 </Text>
               )}

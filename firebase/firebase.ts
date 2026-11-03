@@ -1,19 +1,14 @@
-import { initializeApp } from "firebase/app";
+import { getApp, getApps, initializeApp } from "firebase/app";
 import {
+  getAuth,
   initializeAuth,
   getReactNativePersistence,
   GoogleAuthProvider,
   signInWithCredential,
 } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
 import ReactNativeAsyncStorage from "@react-native-async-storage/async-storage";
-import { GoogleSignin } from "@react-native-google-signin/google-signin";
 
-// 1. Configurar Google (una vez, al inicio)
-GoogleSignin.configure({
-  webClientId: process.env.EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID,
-});
-
-// 2. Config de Firebase
 const firebaseConfig = {
   apiKey: process.env.EXPO_PUBLIC_API_apiKey,
   authDomain: process.env.EXPO_PUBLIC_API_authDomain,
@@ -23,35 +18,59 @@ const firebaseConfig = {
   appId: process.env.EXPO_PUBLIC_API_appId,
 };
 
-// 3. Inicializar Firebase
-export const db = initializeApp(firebaseConfig);
+const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
 
-export const auth = initializeAuth(db, {
-  persistence: getReactNativePersistence(ReactNativeAsyncStorage),
-});
+export const db = getFirestore(app);
+export const AUTH_BYPASS = process.env.EXPO_PUBLIC_AUTH_BYPASS === "true";
 
-// 4. Función principal de login con Google
-export async function signInWithGoogle() {
+export const auth = (() => {
   try {
-    await GoogleSignin.hasPlayServices();
-
-    const userInfo = await GoogleSignin.signIn();
-
-    // En versiones nuevas el idToken está en userInfo.data?.idToken
-    // En versiones antiguas estaba en userInfo.idToken. Cubrimos ambas:
-    const idToken =
-      (userInfo as any)?.data?.idToken ?? (userInfo as any)?.idToken;
-
-    if (!idToken) {
-      throw new Error("No se obtuvo idToken de Google.");
-    }
-
-    const googleCredential = GoogleAuthProvider.credential(idToken);
-    const userCredential = await signInWithCredential(auth, googleCredential);
-
-    return userCredential.user;
+    return initializeAuth(app, {
+      persistence: getReactNativePersistence(ReactNativeAsyncStorage),
+    });
   } catch (error) {
-    console.error("Error during Google Sign-In:", error);
+    if (
+      typeof error === "object" &&
+      error !== null &&
+      "code" in error &&
+      error.code === "auth/already-initialized"
+    ) {
+      return getAuth(app);
+    }
     throw error;
   }
+})();
+
+let googleSigninConfigured = false;
+
+export async function signInWithGoogle() {
+  if (AUTH_BYPASS) {
+    throw new Error("Google Sign-In está desactivado durante el bypass de desarrollo.");
+  }
+
+  const { GoogleSignin } = await import(
+    "@react-native-google-signin/google-signin"
+  );
+  if (!googleSigninConfigured) {
+    GoogleSignin.configure({
+      webClientId: process.env.EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID,
+    });
+    googleSigninConfigured = true;
+  }
+
+  await GoogleSignin.hasPlayServices();
+
+  const response = await GoogleSignin.signIn();
+  if (response.type === "cancelled") {
+    return null;
+  }
+
+  const idToken = response.data.idToken;
+  if (!idToken) {
+    throw new Error("No se obtuvo idToken de Google.");
+  }
+
+  const googleCredential = GoogleAuthProvider.credential(idToken);
+  const userCredential = await signInWithCredential(auth, googleCredential);
+  return userCredential.user;
 }
